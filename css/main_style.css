@@ -210,19 +210,7 @@ section {
 }
 
 /* ==== location ==== */
-.location {
-    width: 100%;
-    height: auto;
-    /* section의 100vh 덮어쓰기 */
-    min-height: 100vh;
-    /* 화면은 채우되 */
-    padding: 40vh 0 10vh;
-    background: #101014;
-    isolation: isolate;
-    position: relative;
-}
 
-/* 위쪽 한지질감 추가 */
 .location {
     width: 100%;
     height: auto;
@@ -243,12 +231,12 @@ section {
     top: 0;
     left: 0;
     width: 100%;
-    height: 600px;
+    height: 700px;
 
     /* ✅ 경로/사이즈는 그대로 두되, 나중에 900px auto로 바꾸는 것도 추천 */
     background: url("../img/pattern.png") top center / 100% auto no-repeat;
 
-    opacity: 0.15;
+    opacity: 0.17;
     mix-blend-mode: screen;
     pointer-events: none;
     z-index: 0;
@@ -262,8 +250,7 @@ section {
 .location .inner {
     position: relative;
     z-index: 1;
-
-    padding-top: 180px;
+    padding-top: 190px;
     display: flex;
     flex-direction: column;
     gap: 70px;
@@ -400,7 +387,86 @@ section {
 .food_map {
     width: 100%;
     height: auto;
-    background: #242427;
+    position: relative;
+    background: url("../img/food_map_bg1.png") center/cover no-repeat;
+    padding: 220px 0;
 }
 
-.food_map .tit {}
+.food_map::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(16,16,20,0.8),
+        rgba(16,16,20,0.9)
+    );
+}
+
+.food_map .inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.food_map .inner .tit {
+    color: #F5F4F4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.food_map .inner .tit em {
+    background: #e19c1d;
+    padding: 10px 30px;
+    border-radius: 40px;
+    color: #101014;
+    font-size: 1.72rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.food_map .inner .tit h2 {
+    font-size: 4.16rem;
+    font-weight: 600;
+}
+
+.food_map .inner .tit span {
+    font-size: 1.72rem;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+.food_map .inner .contain {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.food_map .inner .contain li.item {
+    display: flex;
+    flex-direction: column;
+    background: #F5F4F4;
+    border-radius: var(--round);
+}
+
+.food_map .inner .contain li.item .item_wrap {
+    padding: 40px;
+}
+
+.food_map .inner .contain li.item .item_wrap .top .icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.food_map .inner .contain li.item .item_wrap .top img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;  
+}
+.food_map .inner .contain li.item .item_wrap .top h3 {}
+.food_map .inner .contain li.item .item_wrap .top span {}

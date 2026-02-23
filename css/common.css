@@ -1,0 +1,259 @@
+@charset "utf-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+
+:root {
+    font-size: 18px;
+    --main-black: #101014;
+    --sub-gray-d: #242427;
+    --main-w: #F5F4F4;
+    --point-color: #E49721;
+    --sub-gray-l: #DDDDDE;
+    --sub-blue-l: #232B4A;
+    --sub-blue-d: #16161D;
+    --w: #fff;
+    --round: 5px;
+}
+
+html {
+    scrollbar-gutter: stable;
+    /* 스크롤바 유무로 폭 변하는거 방지 */
+}
+
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+    overflow-y: scroll;
+    /* 항상 세로 스크롤바 자리 확보 */
+}
+
+/* ===== HEADER ===== */
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background: rgba(16, 16, 20, .8);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    overflow: hidden;
+    transition: .25s ease, top .25s ease;
+    color: rgba(255, 255, 255, .92);
+}
+
+header.no-blur {
+    backdrop-filter: none;
+}
+
+/* 공용 inner */
+.inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 100px;
+}
+
+/* 상단바는 절대 안 움직이게 80px 고정 + 위 레이어 */
+header .inner {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+}
+
+header h1 {
+    flex-shrink: 0;
+    width: 200px;
+    height: 50px;
+    background: #ccc;
+}
+
+header h1 img {
+    /* height: 50px; */
+    width: auto;
+    display: none;
+}
+
+/* nav 중앙 고정(상단 80px 라인) */
+header nav {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    /* ✅ gnb가 서브에 가려지지 않게 */
+}
+
+/* ===== 1차 메뉴(컬럼) ===== */
+header .gnb {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    /* ✅ 1차는 라인 고정 */
+}
+
+/* 컬럼 폭 고정(1차/2차 왼쪽 라인 맞추기) */
+header .gnb>li {
+    position: relative;
+    /* sub absolute 기준 */
+    width: auto;
+    /* ✅ 120~160 조절 */
+}
+
+header .gnb>li>a {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* font-weight: 500; */
+    font-size: 1.2rem;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, .92);
+}
+
+/* ===== sub를 absolute로 빼서 gnb 레이아웃 절대 안 흔들리게 ===== */
+header .sub {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    /* ✅ 헤더 아래부터 시작 */
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 20px;
+    /* padding-top: 8px; */
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: .2s ease;
+
+    /* ✅ 높이 자동 측정 가능 + 레이아웃 영향 0 */
+    pointer-events: none;
+}
+
+header .sub a {
+    display: block;
+    padding: 6px 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, .72);
+}
+
+header .sub a:hover {
+    color: #fff;
+}
+
+/* ===== open 상태: 서브가 "전부 한번에" 열림 ===== */
+header.open {
+    height: calc(80px + var(--mega-h, 0px));
+}
+
+header.open .sub {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* 오른쪽 유틸 */
+header .right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+    z-index: 10;
+    font-weight: 300;
+}
+
+header .lang a {
+    position: relative;
+    padding-inline: 1rem;
+    font-size: 0.93rem;
+}
+
+header .lang a:first-child::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 14px;
+    /* 🔥 여기서 선 길이 조절 */
+    background: rgba(255, 255, 255, .92);
+}
+
+header .btn-search {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+header .btn-search i {
+    font-size: 24px;
+    line-height: 1;
+}
+
+
+
+/* footer */
+
+footer {
+    width: 100%;
+    background: #101014;
+    color: rgba(255, 255, 255, .72);
+    padding: 40px 0;
+}
+
+footer .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .left {
+    width: 200px;
+    height: 50px;
+    background: #ccc;
+}
+
+footer .left img {
+    width: auto;
+    /* height: 50px; */
+    display: none;
+}
+
+
+footer .right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: right;
+}
+
+footer .sns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    font-size: 24px;
+}
+
+footer address {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+footer address span,
+footer address em {
+    font-size: 1.2rem;
+}

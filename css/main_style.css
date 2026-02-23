@@ -67,14 +67,18 @@ section {
 .signature_food {
     width: 100%;
     height: auto;
-    background: linear-gradient(180deg, #101014 0%, #101014 72.12%, #61554a 100%);
-    /* #313135 */
+    background: #101014;
     position: relative;
     /* absolute 기준 */
+    background: linear-gradient(180deg,
+            #101014 0%,
+            #101014 80%,
+            #101014 83%,
+            #3e3833 100%);
     overflow: hidden;
     /* 가로스크롤 방지 */
     padding-top: 50vh;
-    padding-bottom: 30vh;
+    padding-bottom: 50vh;
 }
 
 
@@ -212,11 +216,53 @@ section {
     /* section의 100vh 덮어쓰기 */
     min-height: 100vh;
     /* 화면은 채우되 */
-    padding: 20vh 0 10vh;
-    background: linear-gradient(180deg, #101014 0%, #101014 72.12%, #313135 100%);
+    padding: 40vh 0 10vh;
+    background: #101014;
+    isolation: isolate;
+    position: relative;
 }
 
+/* 위쪽 한지질감 추가 */
+.location {
+    width: 100%;
+    height: auto;
+    /* section 100vh 덮기 */
+    min-height: 100vh;
+    padding: 20vh 0 10vh;
+    /* ✅ 40vh → 20vh로 복구(과하게 밀림 방지) */
+    background: #101014;
+    position: relative;
+    isolation: isolate;
+    /* blend 범위 격리 */
+}
+
+/* 위쪽 한지 질감(패턴) 레이어 */
+.location::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+
+    /* ✅ 경로/사이즈는 그대로 두되, 나중에 900px auto로 바꾸는 것도 추천 */
+    background: url("../img/pattern.png") top center / 100% auto no-repeat;
+
+    opacity: 0.15;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+
+    /* 경계선 자연스럽게 마스크(webkit은 사파리용 보험) */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+}
+
+/* 콘텐츠는 패턴 위로 */
 .location .inner {
+    position: relative;
+    z-index: 1;
+
     padding-top: 180px;
     display: flex;
     flex-direction: column;
@@ -349,3 +395,12 @@ section {
 .location .card_item i {
     font-size: 2rem;
 }
+
+/* ==== food_map ==== */
+.food_map {
+    width: 100%;
+    height: auto;
+    background: #242427;
+}
+
+.food_map .tit {}

@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 
 section {
     width: 100%;
@@ -74,7 +74,7 @@ section {
             #101014 0%,
             #101014 80%,
             #101014 83%,
-            #3e3833 100%);
+            #3e3935 100%);
     overflow: hidden;
     /* 가로스크롤 방지 */
     padding-top: 50vh;
@@ -178,7 +178,7 @@ section {
     font-size: 2.22rem;
     font-weight: 600;
     line-height: 1.3;
-    color: #E7A528;
+    color: #efa418;
 }
 
 .signature_food .bin_box span {
@@ -202,7 +202,7 @@ section {
     height: 54px;
     padding: 0 80px;
     border-radius: var(--round);
-    background: #e19c1d;
+    background: #e8a425;
     color: #F5F4F4;
     font-weight: 500;
     white-space: nowrap;
@@ -236,7 +236,7 @@ section {
     /* ✅ 경로/사이즈는 그대로 두되, 나중에 900px auto로 바꾸는 것도 추천 */
     background: url("../img/pattern.png") top center / 100% auto no-repeat;
 
-    opacity: 0.17;
+    opacity: 0.18;
     mix-blend-mode: screen;
     pointer-events: none;
     z-index: 0;
@@ -265,7 +265,7 @@ section {
 }
 
 .location .inner .visit_txt em {
-    background: #e19c1d;
+    background: #e8a425;
     padding: 10px 30px;
     border-radius: 40px;
     color: #101014;
@@ -396,10 +396,8 @@ section {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        rgba(16,16,20,0.8),
-        rgba(16,16,20,0.9)
-    );
+    background: linear-gradient(rgba(16, 16, 20, 0.8),
+            rgba(16, 16, 20, 0.9));
 }
 
 .food_map .inner {
@@ -419,7 +417,7 @@ section {
 }
 
 .food_map .inner .tit em {
-    background: #e19c1d;
+    background: #e8a425;
     padding: 10px 30px;
     border-radius: 40px;
     color: #101014;
@@ -441,32 +439,257 @@ section {
 
 .food_map .inner .contain {
     display: flex;
-    justify-content: center;
     gap: 40px;
+    align-items: stretch;
 }
 
 .food_map .inner .contain li.item {
     display: flex;
     flex-direction: column;
-    background: #F5F4F4;
-    border-radius: var(--round);
+    border-radius: 15px;
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    overflow: visible;
+    cursor: pointer;
+    /* 카드 hover 시 커서 포인터 */
 }
+
+/* 카드 기본 배경을 글래스 레이어로 분리 */
+.food_map .inner .contain li.item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(245, 244, 244, 0.82);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: scale(1);
+    transform-origin: center;
+    transition: transform 0.28s ease, background-color 0.28s ease;
+    pointer-events: none;
+}
+
+/* hover 시 카드 배경만 살짝 확대 */
+.food_map .inner .contain li.item:hover::before {
+    transform: scale(1.035);
+    background: rgb(248, 248, 248);
+}
+
 
 .food_map .inner .contain li.item .item_wrap {
     padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    position: relative;
+    z-index: 1;
+}
+
+.food_map .inner .contain li.item .item_wrap .top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
 }
 
 .food_map .inner .contain li.item .item_wrap .top .icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    margin: 0;
 }
 
 .food_map .inner .contain li.item .item_wrap .top img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;  
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transform: scale(2);
+    /* ← 여기 수치로 ‘꽉 차는 느낌’ 조절 */
+    transform-origin: center;
 }
-.food_map .inner .contain li.item .item_wrap .top h3 {}
-.food_map .inner .contain li.item .item_wrap .top span {}
+
+.food_map .inner .contain li.item .item_wrap .top h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.food_map .inner .contain li.item .item_wrap .top span {
+    color: #7A7A7A;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.food_map .inner .contain li.item .item_wrap .list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.food_map .inner .contain li.item .item_wrap .list p {
+    display: flex;
+    align-items: center;
+    color: #2A2A2A;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.food_map .inner .contain li.item .item_wrap .list em {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: #eab85b;
+    color: #F5F4F4;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-right: 10px;
+}
+
+.food_map .inner .contain li.item .item_wrap .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+}
+
+.food_map .inner .contain li.item .item_wrap .bottom span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: #606060;
+}
+
+.food_map .inner .contain li.item .item_wrap .bottom span:nth-child(2) {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #e68337;
+}
+
+/* ==== category ====*/
+.category {
+    background: #101014;
+    width: 100%;
+    height: auto;
+    padding: 25vh 0;
+    overflow: hidden;
+    /* 가로 튐 방지 */
+}
+
+.category .inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-inline: clamp(1.333rem, 5vw, 5.556rem);
+    /* 24~100px */
+}
+
+.category .inner .tit {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3.88rem;
+}
+
+.category .inner .tit h2 {
+    font-size: 4.16rem;
+    font-weight: 600;
+    color: #F5F4F4;
+}
+
+/* ===== swiper ===== */
+.category_swiper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.category_swiper .swiper-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    /* 줄바꿈 방지 → 세로로 붙는 문제 해결 */
+    gap: clamp(1.667rem, 2.5vw, 2.222rem);
+    /* 30~40px */
+    align-items: stretch;
+    padding: 10vh 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* 슬라이드가 내용 폭만큼 차지하게 */
+.category_swiper .swiper-slide {
+    flex: 0 0 auto;
+    /* gpt수정됨: 가로 레일에서 한 칸 고정 */
+    width: auto;
+}
+
+/* ===== 카드 ===== */
+.category .cat_card {
+    display: block;
+    width: clamp(11.111rem, 18vw, 16.667rem);
+    /* 200~300px */
+    text-decoration: none;
+    transform: translateZ(0);
+    transition: transform 0.25s ease;
+}
+
+/* 정사각형 이미지 */
+.category .img_box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 1.111rem;
+    /* 20px */
+    overflow: hidden;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+}
+
+.category .img_box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0) 65%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 이미지 */
+.category .img_box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    transition: transform 0.35s ease;
+    filter: saturate(0.98) contrast(1.02);
+}
+
+.category .img_box>span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    font-size: 1.333rem;
+    font-weight: 600;
+    color: rgba(245, 244, 244, 0.95);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+/* hover: 카드 확대 + 이미지 확대 */
+.category .cat_card:hover {
+    transform: scale(1.04);
+}
+
+.category .cat_card:hover .img_box img {
+    transform: scale(1.08);
+}

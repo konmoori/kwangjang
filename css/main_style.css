@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 section {
     width: 100%;
@@ -76,13 +76,13 @@ section {
             #101014 83%,
             #3e3935 100%);
     overflow: hidden;
-    /* 가로스크롤 방지 */
+    /* 가로 스크롤 방지 */
     padding-top: 50vh;
     padding-bottom: 50vh;
 }
 
 
-/* 쟁반: 고정 px 제거 → clamp + translate */
+/* 상반: 고정 px 제거 후 clamp + translate */
 .signature_food .food_table {
     position: absolute;
     top: 50%;
@@ -214,9 +214,9 @@ section {
 .location {
     width: 100%;
     height: auto;
-    /* section의 100vh 덮어쓰기 */
+    /* section의 100vh 설정 걷어내기 */
     min-height: 100vh;
-    /* 화면은 채우되 */
+    /* 화면을 채우기 */
     padding: 20vh 0 10vh;
     background: linear-gradient(180deg, #101014 0%, #101014 72.12%, #313135 100%);
 }
@@ -287,12 +287,12 @@ section {
 }
 
 .location .card_item:nth-of-type(2) {
-    --card-offset: 21vh;
+    --card-offset: 18vh;
     z-index: 2;
 }
 
 .location .card_item:nth-of-type(3) {
-    --card-offset: 25vh;
+    --card-offset: 18vh;
     z-index: 3;
 }
 
@@ -423,10 +423,10 @@ section {
     position: relative;
     overflow: visible;
     cursor: pointer;
-    /* 카드 hover 시 커서 포인터 */
+    /* 카드 hover 시 커서 표시 */
 }
 
-/* 카드 기본 배경을 글래스 레이어로 분리 */
+/* 카드 기본 배경과 글래스 레이어 분리 */
 .food_map .inner .contain li.item::before {
     content: "";
     position: absolute;
@@ -443,7 +443,7 @@ section {
     pointer-events: none;
 }
 
-/* hover 시 카드 배경만 살짝 확대 */
+/*  hover 시 카드 배경만 살짝 확대 */
 .food_map .inner .contain li.item:hover::before {
     transform: scale(1.035);
     background: rgb(248, 248, 248);
@@ -478,7 +478,7 @@ section {
     object-fit: contain;
     display: block;
     transform: scale(2);
-    /* ← 여기 수치로 ‘꽉 차는 느낌’ 조절 */
+    /*  아이콘이 작아 보이는 현상 보정 */
     transform-origin: center;
 }
 
@@ -552,9 +552,9 @@ section {
     background: #101014;
     width: 100%;
     height: auto;
-    padding: 25vh 0;
+    padding: 20vh 0;
     overflow: hidden;
-    /* 가로 튐 방지 */
+    /*  가로 넘침 방지 */
 }
 
 .category .inner {
@@ -583,22 +583,43 @@ section {
 }
 
 .category_swiper .swiper-wrapper {
+    --cat-gap: clamp(1.667rem, 2.5vw, 2.222rem);
     display: flex;
     flex-wrap: nowrap;
-    /* 줄바꿈 방지 → 세로로 붙는 문제 해결 */
-    gap: clamp(1.667rem, 2.5vw, 2.222rem);
+    /* 줄바꿈 방지 및 세로로 붙는 문제 해결 */
+    /* 복제 슬라이드 기준 무한 루프 간격 */
+    gap: var(--cat-gap);
     /* 30~40px */
     align-items: stretch;
-    padding: 10vh 0;
+    padding: 5vh 0;
     margin: 0;
     list-style: none;
+    width: max-content;
+    /* 오른쪽에서 왼쪽으로 천천히 무한 루프 */
+    animation: category_loop 36s linear infinite;
 }
 
-/* 슬라이드가 내용 폭만큼 차지하게 */
+/* 슬라이드가 내용 너비만 차지하게 */
 .category_swiper .swiper-slide {
     flex: 0 0 auto;
-    /* 가로 레일에서 한 칸 고정 */
+    /* 가로 리스트에서 폭 고정 */
     width: auto;
+}
+
+/* cat_card hover 시 루프 즉시 정지 */
+.category_swiper.is-stop .swiper-wrapper {
+    animation-play-state: paused;
+}
+
+/* 복제 1세트 기준으로 끊김 없이 반복 이동 */
+@keyframes category_loop {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-50% - (var(--cat-gap) / 2)));
+    }
 }
 
 /* ===== 카드 ===== */
@@ -656,7 +677,7 @@ section {
     white-space: nowrap;
 }
 
-/* hover: 카드 확대 + 이미지 확대 */
+/* hover 시 카드 확대 + 이미지 확대 */
 .category .cat_card:hover {
     transform: scale(1.04);
 }
@@ -714,4 +735,27 @@ section {
     font-size: 1.1rem;
     font-weight: 600;
     color: #E49721;
+}
+
+
+/* ==== top_btn ==== */
+.top_btn {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1000;
+}
+
+.top_btn a {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #e8a425;
+    color: #F5F4F4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    opacity: 0.8;
 }

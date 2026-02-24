@@ -18,7 +18,7 @@
 html {
     scrollbar-gutter: stable;
     scroll-behavior: smooth;
-    /* ?ㅽ겕濡ㅻ컮 ?좊Т濡???蹂?섎뒗嫄?諛⑹? */
+    /* 스크롤바 유무로 폭이 변하는 것 방지 */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -31,7 +31,7 @@ body {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 
     overflow-y: scroll;
-    /* ??긽 ?몃줈 ?ㅽ겕濡ㅻ컮 ?먮━ ?뺣낫 */
+    /*  항상 세로 스크롤바 자리 확보 */
 }
 
 /* ===== HEADER ===== */
@@ -53,7 +53,7 @@ header.no-blur {
     backdrop-filter: none;
 }
 
-/* 怨듭슜 inner */
+/* 공용 inner */
 .inner {
     width: 100%;
     max-width: 1400px;
@@ -61,7 +61,7 @@ header.no-blur {
     padding: 0 100px;
 }
 
-/* ?곷떒諛붾뒗 ?덈? ???吏곸씠寃?80px 怨좎젙 + ???덉씠??*/
+/*  상단바는 높이 안 늘어나게 80px 고정 + 내부 정렬 */
 header .inner {
     height: 80px;
     display: flex;
@@ -84,7 +84,7 @@ header h1 img {
     display: none;
 }
 
-/* nav 以묒븰 怨좎젙(?곷떒 80px ?쇱씤) */
+/* nav 중앙 고정(상단 80px 라인) */
 header nav {
     position: absolute;
     left: 50%;
@@ -94,23 +94,23 @@ header nav {
     display: flex;
     align-items: center;
     z-index: 10;
-    /* ??gnb媛 ?쒕툕??媛?ㅼ?吏 ?딄쾶 */
+    /*  gnb가 서브와 겹치지 않게 */
 }
 
-/* ===== 1李?硫붾돱(而щ읆) ===== */
+/*  ===== 1차 메뉴(컬럼) ===== */
 header .gnb {
     display: flex;
     gap: 35px;
     align-items: center;
-    /* ??1李⑤뒗 ?쇱씤 怨좎젙 */
+    /*  1차 메뉴는 한 줄 고정 */
 }
 
-/* 而щ읆 ??怨좎젙(1李?2李??쇱そ ?쇱씤 留욎텛湲? */
+/* 컬럼 폭 고정(1차/2차 왼쪽 라인 맞추기) */
 header .gnb>li {
     position: relative;
-    /* sub absolute 湲곗? */
+    /*  sub absolute 기준 */
     width: auto;
-    /* ??120~160 議곗젅 */
+    /* 필요 시 120~160px로 조절 */
 }
 
 header .gnb>li>a {
@@ -125,12 +125,12 @@ header .gnb>li>a {
     color: rgba(255, 255, 255, .92);
 }
 
-/* ===== sub瑜?absolute濡?鍮쇱꽌 gnb ?덉씠?꾩썐 ?덈? ???붾뱾由ш쾶 ===== */
+/* ===== sub를 absolute로 빼서 gnb 레이아웃에 영향 없게 ===== */
 header .sub {
     position: absolute;
     left: 0;
     top: 80px;
-    /* ???ㅻ뜑 ?꾨옒遺???쒖옉 */
+    /* 헤더 아래부터 시작 */
     width: 100%;
     padding-top: 8px;
     padding-bottom: 20px;
@@ -141,7 +141,7 @@ header .sub {
     transform: translateY(-6px);
     transition: .2s ease;
 
-    /* ???믪씠 ?먮룞 痢≪젙 媛??+ ?덉씠?꾩썐 ?곹뼢 0 */
+    /* 높이 자동 측정 가능 + 레이아웃 영향 0 */
     pointer-events: none;
 }
 
@@ -156,7 +156,7 @@ header .sub a:hover {
     color: var(--point-color);
 }
 
-/* ===== open ?곹깭: ?쒕툕媛 "?꾨? ?쒕쾲?? ?대┝ ===== */
+/* ===== open 상태: 서브가 아래로 한 번에 열림 ===== */
 header.open {
     height: calc(80px + var(--mega-h, 0px));
 }
@@ -168,7 +168,7 @@ header.open .sub {
     pointer-events: auto;
 }
 
-/* ?ㅻⅨ履??좏떥 */
+/* 오른쪽 유틸 */
 header .right {
     display: flex;
     align-items: center;
@@ -192,7 +192,7 @@ header .lang a:first-child::after {
     transform: translateY(-50%);
     width: 1px;
     height: 14px;
-    /* ?뵦 ?ш린????湲몄씠 議곗젅 */
+    /* 선 굵기/길이 조절 */
     background: rgba(255, 255, 255, .92);
 }
 
@@ -264,5 +264,3 @@ footer address span,
 footer address em {
     font-size: 1.2rem;
 }
-
-

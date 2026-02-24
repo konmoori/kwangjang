@@ -214,43 +214,15 @@ section {
 .location {
     width: 100%;
     height: auto;
-    /* section 100vh 덮기 */
+    /* section의 100vh 덮어쓰기 */
     min-height: 100vh;
+    /* 화면은 채우되 */
     padding: 20vh 0 10vh;
-    /* ✅ 40vh → 20vh로 복구(과하게 밀림 방지) */
-    background: #101014;
-    position: relative;
-    isolation: isolate;
-    /* blend 범위 격리 */
+    background: linear-gradient(180deg, #101014 0%, #101014 72.12%, #313135 100%);
 }
 
-/* 위쪽 한지 질감(패턴) 레이어 */
-.location::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 700px;
-
-    /* ✅ 경로/사이즈는 그대로 두되, 나중에 900px auto로 바꾸는 것도 추천 */
-    background: url("../img/pattern.png") top center / 100% auto no-repeat;
-
-    opacity: 0.18;
-    mix-blend-mode: screen;
-    pointer-events: none;
-    z-index: 0;
-
-    /* 경계선 자연스럽게 마스크(webkit은 사파리용 보험) */
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
-}
-
-/* 콘텐츠는 패턴 위로 */
 .location .inner {
-    position: relative;
-    z-index: 1;
-    padding-top: 190px;
+    padding-top: 180px;
     display: flex;
     flex-direction: column;
     gap: 70px;
@@ -265,7 +237,7 @@ section {
 }
 
 .location .inner .visit_txt em {
-    background: #e8a425;
+    background: #e19c1d;
     padding: 10px 30px;
     border-radius: 40px;
     color: #101014;
@@ -294,36 +266,34 @@ section {
 
 .location .card_stack {
     width: min(70rem, 90vw);
-    /* 너무 커지지 않게 */
-    display: flex;
     position: relative;
-    flex-direction: column;
-    padding-bottom: 55vh;
-    /* sticky 끝지점 확보 (값은 45~65vh 사이 조절) */
+    display: block;
+    padding-bottom: 45vh;
 }
 
 .location .card_item {
     position: sticky;
-    /* top: 10vh;
-    공통으로 카드가 붙는 위치
-    (계단형식을 할꺼면 지우고 nth한테 각각 주기) */
+    top: 10vh;
     margin-bottom: 18vh;
-    /* 다음 카드 등장 공간 */
+}
+
+.location .card_item:last-child {
+    margin-bottom: 0;
 }
 
 .location .card_item:nth-of-type(1) {
+    --card-offset: 0vh;
     z-index: 1;
-    top: 10vh;
 }
 
 .location .card_item:nth-of-type(2) {
+    --card-offset: 21vh;
     z-index: 2;
-    top: 28vh;
 }
 
 .location .card_item:nth-of-type(3) {
+    --card-offset: 25vh;
     z-index: 3;
-    top: 46vh;
 }
 
 .location .card_item a {
@@ -336,6 +306,7 @@ section {
     border: 3px solid #F5F4F4;
     color: #F5F4F4;
     backdrop-filter: blur(6px);
+    transform: translateY(var(--card-offset, 0vh));
 
 }
 
@@ -596,13 +567,13 @@ section {
 .category .inner .tit {
     width: 100%;
     text-align: center;
-    margin-bottom: 3.88rem;
 }
 
 .category .inner .tit h2 {
     font-size: 4.16rem;
     font-weight: 600;
     color: #F5F4F4;
+    margin-bottom: 2.4rem;
 }
 
 /* ===== swiper ===== */
@@ -626,7 +597,7 @@ section {
 /* 슬라이드가 내용 폭만큼 차지하게 */
 .category_swiper .swiper-slide {
     flex: 0 0 auto;
-    /* gpt수정됨: 가로 레일에서 한 칸 고정 */
+    /* 가로 레일에서 한 칸 고정 */
     width: auto;
 }
 
@@ -655,7 +626,7 @@ section {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0) 65%);
+    background: rgba(0, 0, 0, 0.3);
     z-index: 1;
     pointer-events: none;
 }
@@ -692,4 +663,55 @@ section {
 
 .category .cat_card:hover .img_box img {
     transform: scale(1.08);
+}
+
+
+/* ==== pop ==== */
+.pop {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: #E49721;
+    padding-block: 6rem;
+}
+
+.pop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../img/pop_pattern_mask.png") center / cover no-repeat;
+    z-index: 0;
+    opacity: 0.06;
+    /* pointer-events: none; */
+}
+
+.pop .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}
+
+.pop .inner h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02px;
+    color: #F5F4F4;
+}
+
+.pop .inner span {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #F5F4F4;
+}
+
+.pop .inner a {
+    background: #F5F4F4;
+    padding: 20px 93px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #E49721;
 }

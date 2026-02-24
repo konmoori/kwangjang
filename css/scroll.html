@@ -511,6 +511,182 @@
     font-size: 2rem;
     }
 
+
+
+    <!-- 기존버전고장난버전 -->
+    .location {
+    width: 100%;
+    height: auto;
+    /* section 100vh 덮기 */
+    min-height: 100vh;
+    padding: 20vh 0 10vh;
+    /* ✅ 40vh → 20vh로 복구(과하게 밀림 방지) */
+    background: #101014;
+    position: relative;
+    isolation: isolate;
+    /* blend 범위 격리 */
+    }
+
+    /* 위쪽 한지 질감(패턴) 레이어 */
+    .location::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 700px;
+
+    /* ✅ 경로/사이즈는 그대로 두되, 나중에 900px auto로 바꾸는 것도 추천 */
+    background: url("../img/pattern.png") top center / 100% auto no-repeat;
+
+    opacity: 0.18;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+
+    /* 경계선 자연스럽게 마스크(webkit은 사파리용 보험) */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+    }
+
+    /* 콘텐츠는 패턴 위로 */
+    .location .inner {
+    position: relative;
+    z-index: 1;
+    padding-top: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    }
+
+    .location .inner .visit_txt {
+    color: #F5F4F4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    }
+
+    .location .inner .visit_txt em {
+    background: #e8a425;
+    padding: 10px 30px;
+    border-radius: 40px;
+    color: #101014;
+    font-size: 1.72rem;
+    font-weight: 500;
+    line-height: 1.4;
+    }
+
+    .location .inner .visit_txt h2 {
+    font-size: 4.16rem;
+    font-weight: 700;
+    }
+
+    .location .inner .visit_txt span {
+    font-size: 1.72rem;
+    font-weight: 300;
+    line-height: 1.4;
+    }
+
+    .location .card_wrap {
+    margin-top: clamp(3.333rem, 6vh, 6.667rem);
+    /* 타이틀과 간격 */
+    display: flex;
+    justify-content: center;
+    }
+
+    .location .card_stack {
+    width: min(70rem, 90vw);
+    /* 너무 커지지 않게 */
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding-bottom: 55vh;
+    /* sticky 끝지점 확보 (값은 45~65vh 사이 조절) */
+    }
+
+    .location .card_item {
+    position: sticky;
+    /* top: 10vh;
+    공통으로 카드가 붙는 위치
+    (계단형식을 할꺼면 지우고 nth한테 각각 주기) */
+    margin-bottom: 18vh;
+    /* 다음 카드 등장 공간 */
+    }
+
+    .location .card_item:nth-of-type(1) {
+    z-index: 1;
+    top: 10vh;
+    }
+
+    .location .card_item:nth-of-type(2) {
+    z-index: 2;
+    top: 28vh;
+    }
+
+    .location .card_item:nth-of-type(3) {
+    z-index: 3;
+    top: 46vh;
+    }
+
+    .location .card_item a {
+    display: flex;
+    justify-content: space-between;
+    padding: 65px 80px;
+    /* 40px */
+    border-radius: 1.778rem;
+    /* 32px */
+    border: 3px solid #F5F4F4;
+    color: #F5F4F4;
+    backdrop-filter: blur(6px);
+
+    }
+
+    .location .card_item:nth-of-type(1)>a {
+    background: rgb(221, 221, 222);
+    color: #101014;
+    box-shadow: 0 0 20px #61554a;
+    }
+
+    .location .card_item:nth-of-type(2)>a {
+    background: rgb(35, 43, 74);
+    box-shadow: 0 0 20px #61554a;
+    }
+
+    .location .card_item:nth-of-type(3)>a {
+    background: rgb(22, 22, 29);
+    box-shadow: 0 0 20px #61554a;
+    }
+
+    .location .card_item a .card_txt {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    }
+
+    .location .card_item a .card_txt strong {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.5;
+    }
+
+    .location .card_item a .card_txt em {
+    font-size: 1.33rem;
+    font-weight: 300;
+    line-height: 1.5;
+    }
+
+    .location .card_item a .card_txt span {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5;
+    }
+
+    .location .card_item i {
+    font-size: 2rem;
+    }
+
+
 </body>
 
 </html>

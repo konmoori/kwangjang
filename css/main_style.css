@@ -69,18 +69,26 @@ section {
     height: auto;
     background: #101014;
     position: relative;
-    /* absolute 기준 */
     background: linear-gradient(180deg,
             #101014 0%,
             #101014 80%,
             #101014 83%,
             #3e3935 100%);
-    overflow: hidden;
-    /* 가로 스크롤 방지 */
     padding-top: 50vh;
     padding-bottom: 50vh;
 }
+.signature_food .side_pick {
+    position: absolute;
+    top: -30%;
+    left: -25%;
+    width: 80px;
+    height: auto;
+    z-index: 4;
+}
 
+.signature_food .side_pick img {
+    width: 100%;
+}
 
 /* 상반: 고정 px 제거 후 clamp + translate */
 .signature_food .food_table {
